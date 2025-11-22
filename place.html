@@ -20,3 +20,68 @@
   <script src="js/script.js" defer></script>
 </head>
 <body>
+  <header class="site-header">
+    <div class="brand">
+      <h1 class="site-title">My Place</h1>
+      <p class="subtitle">A short tagline about the country/place</p>
+    </div>
+    <nav class="main-nav" aria-label="Main navigation">
+      <a href="#">Home</a>
+      <a href="#">Culture</a>
+      <a href="#">Weather</a>
+      <a href="#">Gallery</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <picture>
+        <source media="(max-width: 480px)" srcset="images/hero-small.webp" type="image/webp">
+        <source media="(max-width: 1024px)" srcset="images/hero-medium.webp" type="image/webp">
+        <img src="images/hero-large.webp" alt="Scenic view of the place" width="1600" height="900" loading="lazy">
+      </picture>
+      <div class="hero-caption">
+        <h2>Welcome to My Place</h2>
+        <p>Short description that sits on the hero area.</p>
+      </div>
+    </section>
+
+    <section class="content-grid">
+      <article class="about">
+        <h3>About</h3>
+        <p>Text describing the place — history, culture, or why you'd like to visit.</p>
+      </article>
+
+      <aside class="weather" id="weather">
+        <h3>Weather <span class="weather-icon--wide" aria-hidden="true"></span></h3>
+        <div class="weather-icon--mobile" aria-hidden="true">
+          <img src="images/weather-mobile.svg" alt="" width="48" height="48">
+        </div>
+        <dl>
+          <div class="row">
+            <dt>Condition:</dt>
+            <dd>Partly Cloudy</dd>
+          </div>
+          <div class="row">
+            <dt>Temperature:</dt>
+            <dd id="temp">8</dd>
+          </div>
+          <div class="row">
+            <dt>Wind Speed:</dt>
+            <dd id="wind">20</dd>
+          </div>
+          <div class="row">
+            <dt>Wind Chill:</dt>
+            <dd id="windchill">...</dd>
+          </div>
+        </dl>
+      </aside>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> My Place. All rights reserved.</p>
+    <p>Last modified: <span id="modified"></span></p>
+  </footer>
+</body>
+</html>
