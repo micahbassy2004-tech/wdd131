@@ -1,3 +1,6 @@
+/* -------------------
+   Base Styles
+------------------- */
 body {
     font-family: Arial, sans-serif;
     margin: 20px;
@@ -8,6 +11,9 @@ header {
     text-align: center;
 }
 
+/* -------------------
+   Navigation
+------------------- */
 nav {
     display: flex;
     justify-content: center;
@@ -30,12 +36,18 @@ nav a:hover {
     transform: scale(1.05);
 }
 
+/* -------------------
+   Temple Cards Grid
+------------------- */
 #temple-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 20px;
 }
 
+/* -------------------
+   Individual Card Styles
+------------------- */
 .card {
     border: 1px solid #ccc;
     border-radius: 10px;
@@ -51,4 +63,23 @@ nav a:hover {
 .card img {
     width: 100%;
     border-radius: 10px;
+}
+
+/* -------------------
+   Responsive Media Query
+------------------- */
+@media (max-width: 600px) {
+    #temple-cards {
+        grid-template-columns: 1fr;
+    }
+
+    nav {
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    nav a {
+        width: 100%;
+        text-align: center;
+    }
 }
