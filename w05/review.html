@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Review Submitted</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>Review Confirmation</h1>
+  </header>
+
+  <main class="container">
+    <div id="confirmation" class="card">
+      <h2>Thank you!</h2>
+      <p id="message">Processing your review...</p>
+
+      <dl id="summary" class="summary-list" aria-live="polite"></dl>
+
+      <p id="counter" class="counter"></p>
+
+      <p>
+        <a href="form.html">Submit another review</a>
+      </p>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+<p>Created by Micah Maurice Bassey</p>
+  <p>WDD131 — Dynamic Web Fundamentals | BYU-Pathway Worldwide</p>
+</footer>
+
+  <script>
+  // Same product array used to decode product id into name
+  const products = [
+    { id: "fc-1888", name: "flux capacitor", averagerating: 4.5 },
+    { id: "fc-2050", name: "power laces", averagerating: 4.7 },
+    { id: "fs-1987", name: "time circuits", averagerating: 3.5 },
+    { id: "ac-2000", name: "low voltage reactor", averagerating: 3.9 },
+    { id: "jj-1969", name: "warp equalizer", averagerating: 5.0 }
+  ];
+
+  // Parse GET params
+  const params = new URLSearchParams(window.location.search);
+  const productId = params.get('product') || '';
+  const rating = params.get('rating') || '';
+  const installed = params.get('installed') || '';
+  const reviewText = params.get('review') || '';
+  const username = params.get('username') || '';
+  // features may appear multiple times; URLSearchParams.getAll handles that
+  const features = params.getAll('features');
+
+  // Find product name by id
+  const productObj = products.find(p => p.id === productId);
+  const productName = productObj ? productObj.name : productId;
+
+  // Build summary
+  const summaryEl = document.getElementById('summary');
+  summaryEl.innerHTML = '';
+  function addSummary(term, desc) {
+    const dt = document.createElement('dt'); dt.textContent = term;
+    const dd = document.createElement('dd'); dd.textContent = desc || '—';
+    summaryEl.appendChild(dt); summaryEl.appendChild(dd);
+  }
+
+  addSummary('Product', productName);
+  addSummary('Overall rating', rating ? rating + ' / 5' : '—');
+  addSummary('Date installed', installed);
+  addSummary('Useful features', features.length ? features.join(', ') : 'None selected');
+  addSummary('Review text', reviewText ? decodeURIComponent(reviewText) : 'None');
+  addSummary('Submitted by', username || 'Anonymous');
+
+  // localStorage counter: increment whenever this page loads with a product param and rating (simple guard)
+  const counterEl = document.getElementById('counter');
+  try {
+    if (productId && rating && installed) {
+      const key = 'wdd131_reviewCount';
+      const raw = localStorage.getItem(key);
+      const current = raw ? parseInt(raw, 10) : 0;
+      const next = current + 1;
+      localStorage.setItem(key, String(next));
+      counterEl.textContent = `You have submitted ${next} review${next === 1 ? '' : 's'} on this browser.`;
+    } else {
+      counterEl.textContent = 'No review was recorded (missing required form fields).';
+    }
+  } catch (err) {
+    counterEl.textContent = 'Unable to access localStorage in this browser.';
+  }
+
+  // Friendly message
+  const messageEl = document.getElementById('message');
+  messageEl.textContent = `Your review for "${productName}" has been received.`;
+  </script>
+</body>
+</html>

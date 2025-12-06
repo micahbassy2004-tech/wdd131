@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Product Review Form</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="site-header">
+    <h1>TrendWear — Product Review</h1>
+  </header>
+
+  <main class="container">
+    <form id="product-review-form" class="card" method="get" action="review.html" novalidate>
+      <fieldset>
+        <legend>Product Review</legend>
+
+        <!-- Product Name (select populated by JS) -->
+        <label for="product" class="required">Product Name <span aria-hidden="true">*</span></label>
+        <select id="product" name="product" required>
+          <option value="" disabled selected>Select a Product ...</option>
+          <!-- options added by js -->
+        </select>
+
+        <!-- Overall Rating (radios 1-5) -->
+        <fieldset class="rating-group">
+          <legend class="required">Overall Rating <span aria-hidden="true">*</span></legend>
+          <div class="rating-row" role="radiogroup" aria-labelledby="rating-legend">
+            <label for="rating-1">
+              <input type="radio" id="rating-1" name="rating" value="1" required>
+              <span aria-hidden="true">☆</span> 1
+            </label>
+            <label for="rating-2">
+              <input type="radio" id="rating-2" name="rating" value="2">
+              <span aria-hidden="true">☆</span> 2
+            </label>
+            <label for="rating-3">
+              <input type="radio" id="rating-3" name="rating" value="3">
+              <span aria-hidden="true">☆</span> 3
+            </label>
+            <label for="rating-4">
+              <input type="radio" id="rating-4" name="rating" value="4">
+              <span aria-hidden="true">☆</span> 4
+            </label>
+            <label for="rating-5">
+              <input type="radio" id="rating-5" name="rating" value="5">
+              <span aria-hidden="true">☆</span> 5
+            </label>
+          </div>
+        </fieldset>
+
+        <!-- Date of Installation -->
+        <label for="installed" class="required">Date of Installation <span aria-hidden="true">*</span></label>
+        <input type="date" id="installed" name="installed" required>
+
+        <!-- Useful Features (checkboxes) -->
+        <fieldset>
+          <legend>Useful Features (check all that apply)</legend>
+          <label for="feature-ease">
+            <input type="checkbox" id="feature-ease" name="features" value="ease-of-use"> Ease of use
+          </label>
+          <label for="feature-performance">
+            <input type="checkbox" id="feature-performance" name="features" value="performance"> Performance
+          </label>
+          <label for="feature-support">
+            <input type="checkbox" id="feature-support" name="features" value="support"> Customer support
+          </label>
+          <label for="feature-value">
+            <input type="checkbox" id="feature-value" name="features" value="value"> Value for money
+          </label>
+        </fieldset>
+
+        <!-- Written Review -->
+        <label for="review">Written Review</label>
+        <textarea id="review" name="review" rows="5" placeholder="Write your review (optional)"></textarea>
+
+        <!-- User Name -->
+        <label for="username">Your Name (optional)</label>
+        <input type="text" id="username" name="username" placeholder="Full name">
+
+        <!-- Submit -->
+        <div class="actions">
+          <input type="submit" value="Submit Review">
+        </div>
+      </fieldset>
+    </form>
+  </main>
+
+  <footer class="site-footer">
+<p>Created by Micah Maurice Bassey</p>
+  <p>WDD131 — Dynamic Web Fundamentals | BYU-Pathway Worldwide</p>
+</footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
+<footer>
+  

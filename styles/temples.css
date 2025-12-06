@@ -1,0 +1,91 @@
+/* temples.css */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: #f4f9fb;
+  color: #333;
+}
+
+/* Header */
+header {
+  background-color: #005f73;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+}
+
+header h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+#menu {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: white;
+  cursor: pointer;
+}
+
+.navigation {
+  display: none;
+  flex-direction: column;
+  background-color: #0a9396;
+}
+
+.navigation a {
+  color: white;
+  padding: 0.75rem;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+.navigation a:hover {
+  background-color: #94d2bd;
+  color: #003049;
+}
+
+.navigation.open {
+  display: flex;
+}
+
+/* Main */
+main {
+  padding: 1rem;
+  text-align: center;
+}
+
+.temple-gallery {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+figure {
+  background-color: white;
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+figure img {
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+}
+
+figcaption {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+/* Footer */
+footer {
+  background-color: #005f73;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-top: 2rem;
+}
