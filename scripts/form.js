@@ -179,3 +179,18 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+document.addEventListener('DOMContentLoaded', () => {
+    // Update footer with current year and last modified date
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+    document.getElementById('lastModified').textContent = document.lastModified;
+
+    // Populate product select options (example)
+    const productSelect = document.getElementById('productName');
+    const products = ["Product A", "Product B", "Product C"];
+    products.forEach(product => {
+        const option = document.createElement('option');
+        option.value = product.toLowerCase().replace(/\s+/g, '-');
+        option.textContent = product;
+        productSelect.appendChild(option);
+    });
+});
