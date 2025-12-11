@@ -1,96 +1,131 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Review Submitted</title>
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Review Submission Confirmation">
+    <title>Review Submitted | WDD131</title>
+    <link rel="stylesheet" href="styles/form.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <script src="scripts/review.js" defer></script>
 </head>
 <body>
-  <header class="site-header">
-    <h1>Review Confirmation</h1>
-  </header>
-
-  <main class="container">
-    <div id="confirmation" class="card">
-      <h2>Thank you!</h2>
-      <p id="message">Processing your review...</p>
-
-      <dl id="summary" class="summary-list" aria-live="polite"></dl>
-
-      <p id="counter" class="counter"></p>
-
-      <p>
-        <a href="form.html">Submit another review</a>
-      </p>
-    </div>
-  </main>
-
-  <footer class="site-footer">
-<p>Created by Micah Maurice Bassey</p>
-  <p>WDD131 — Dynamic Web Fundamentals | BYU-Pathway Worldwide</p>
-</footer>
-
-  <script>
-  // Same product array used to decode product id into name
-  const products = [
-    { id: "fc-1888", name: "flux capacitor", averagerating: 4.5 },
-    { id: "fc-2050", name: "power laces", averagerating: 4.7 },
-    { id: "fs-1987", name: "time circuits", averagerating: 3.5 },
-    { id: "ac-2000", name: "low voltage reactor", averagerating: 3.9 },
-    { id: "jj-1969", name: "warp equalizer", averagerating: 5.0 }
-  ];
-
-  // Parse GET params
-  const params = new URLSearchParams(window.location.search);
-  const productId = params.get('product') || '';
-  const rating = params.get('rating') || '';
-  const installed = params.get('installed') || '';
-  const reviewText = params.get('review') || '';
-  const username = params.get('username') || '';
-  // features may appear multiple times; URLSearchParams.getAll handles that
-  const features = params.getAll('features');
-
-  // Find product name by id
-  const productObj = products.find(p => p.id === productId);
-  const productName = productObj ? productObj.name : productId;
-
-  // Build summary
-  const summaryEl = document.getElementById('summary');
-  summaryEl.innerHTML = '';
-  function addSummary(term, desc) {
-    const dt = document.createElement('dt'); dt.textContent = term;
-    const dd = document.createElement('dd'); dd.textContent = desc || '—';
-    summaryEl.appendChild(dt); summaryEl.appendChild(dd);
-  }
-
-  addSummary('Product', productName);
-  addSummary('Overall rating', rating ? rating + ' / 5' : '—');
-  addSummary('Date installed', installed);
-  addSummary('Useful features', features.length ? features.join(', ') : 'None selected');
-  addSummary('Review text', reviewText ? decodeURIComponent(reviewText) : 'None');
-  addSummary('Submitted by', username || 'Anonymous');
-
-  // localStorage counter: increment whenever this page loads with a product param and rating (simple guard)
-  const counterEl = document.getElementById('counter');
-  try {
-    if (productId && rating && installed) {
-      const key = 'wdd131_reviewCount';
-      const raw = localStorage.getItem(key);
-      const current = raw ? parseInt(raw, 10) : 0;
-      const next = current + 1;
-      localStorage.setItem(key, String(next));
-      counterEl.textContent = `You have submitted ${next} review${next === 1 ? '' : 's'} on this browser.`;
-    } else {
-      counterEl.textContent = 'No review was recorded (missing required form fields).';
-    }
-  } catch (err) {
-    counterEl.textContent = 'Unable to access localStorage in this browser.';
-  }
-
-  // Friendly message
-  const messageEl = document.getElementById('message');
-  messageEl.textContent = `Your review for "${productName}" has been received.`;
-  </script>
+    <header>
+        <div class="container">
+            <h1>Thank You!</h1>
+            <p>Your review has been submitted successfully</p>
+        </div>
+    </header>
+    
+    <main class="container">
+        <div class="confirmation">
+            <div class="confirmation-icon">✓</div>
+            <h2>Review Submitted Successfully</h2>
+            <p>Thank you for taking the time to share your feedback with us. Your review helps us improve our products and services.</p>
+            
+            <div class="review-summary">
+                <h3>Your Review Summary</h3>
+                <div id="reviewDetails">
+                    <!-- Review details will be populated from URL parameters -->
+                </div>
+            </div>
+            
+            <div class="review-counter">
+                <h3>Review Counter</h3>
+                <p>You have submitted <span id="reviewCount">0</span> review(s) from this browser.</p>
+                <p class="hint">This counter is stored locally in your browser.</p>
+            </div>
+            
+            <div class="confirmation-actions">
+                <a href="form.html" class="btn">Submit Another Review</a>
+                <a href="#" class="btn secondary" onclick="window.history.back()">Go Back</a>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> | Product Review Form | WDD131</p>
+            <p>Last Modified: <span id="lastModified"></span></p>
+        </div>
+    </footer>
+    
+    <script>
+        // Update footer with current year and last modified date
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        document.getElementById('lastModified').textContent = document.lastModified;
+        
+        // Parse URL parameters and display review summary
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const reviewDetails = document.getElementById('reviewDetails');
+            
+            let html = '<ul>';
+            
+            // Product name
+            const productName = urlParams.get('productName');
+            if (productName) {
+                html += `<li><strong>Product:</strong> ${decodeURIComponent(productName)}</li>`;
+            }
+            
+            // Rating
+            const rating = urlParams.get('rating');
+            if (rating) {
+                let stars = '';
+                for (let i = 1; i <= 5; i++) {
+                    stars += i <= rating ? '★' : '☆';
+                }
+                html += `<li><strong>Rating:</strong> ${stars} (${rating}/5)</li>`;
+            }
+            
+            // Installation date
+            const installDate = urlParams.get('installDate');
+            if (installDate) {
+                const date = new Date(installDate);
+                const formattedDate = date.toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                html += `<li><strong>Installation Date:</strong> ${formattedDate}</li>`;
+            }
+            
+            // Useful features
+            const usefulFeatures = urlParams.getAll('usefulFeatures');
+            if (usefulFeatures.length > 0) {
+                const featureLabels = {
+                    'ease-of-use': 'Easy to install and use',
+                    'durability': 'Durable and long-lasting',
+                    'performance': 'High performance',
+                    'design': 'Attractive design',
+                    'value': 'Good value for money',
+                    'support': 'Good customer support'
+                };
+                
+                html += '<li><strong>Useful Features:</strong><ul>';
+                usefulFeatures.forEach(feature => {
+                    html += `<li>${featureLabels[feature] || feature}</li>`;
+                });
+                html += '</ul></li>';
+            }
+            
+            // Written review (if provided)
+            const writtenReview = urlParams.get('writtenReview');
+            if (writtenReview && writtenReview.trim() !== '') {
+                html += `<li><strong>Written Review:</strong> ${decodeURIComponent(writtenReview)}</li>`;
+            }
+            
+            // User name (if provided)
+            const userName = urlParams.get('userName');
+            if (userName && userName.trim() !== '') {
+                html += `<li><strong>Submitted by:</strong> ${decodeURIComponent(userName)}</li>`;
+            }
+            
+            html += '</ul>';
+            reviewDetails.innerHTML = html;
+        });
+    </script>
 </body>
 </html>
