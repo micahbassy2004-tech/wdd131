@@ -19,30 +19,26 @@
             <p>Share your experience with our products</p>
         </div>
     </header>
-    
+
     <main class="container">
         <form id="reviewForm" method="get" action="review.html">
             <div class="form-intro">
                 <h2>Tell Us About Your Experience</h2>
                 <p>Please fill out this form to help us improve our products. Fields marked with <span class="required-marker">*</span> are required.</p>
             </div>
-            
+
             <div class="form-group">
-                <label for="productName">
-                    Product Name <span class="required-marker">*</span>
-                </label>
+                <label for="productName">Product Name <span class="required-marker">*</span></label>
                 <select id="productName" name="productName" required>
                     <option value="" disabled selected>Select a Product ...</option>
                     <!-- Options populated by JavaScript -->
                 </select>
                 <div class="hint">Choose the product you're reviewing</div>
             </div>
-            
+
             <div class="form-group">
                 <fieldset>
-                    <legend>
-                        Overall Rating <span class="required-marker">*</span>
-                    </legend>
+                    <legend>Overall Rating <span class="required-marker">*</span></legend>
                     <div class="rating-options">
                         <div class="rating-option">
                             <input type="radio" id="rating1" name="rating" value="1" required>
@@ -52,28 +48,28 @@
                             </label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="rating2" name="rating" value="2">
+                            <input type="radio" id="rating2" name="rating" value="2" required>
                             <label for="rating2">
                                 <span class="stars">★★☆☆☆</span>
                                 <span class="rating-text">2 - Fair</span>
                             </label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="rating3" name="rating" value="3">
+                            <input type="radio" id="rating3" name="rating" value="3" required>
                             <label for="rating3">
                                 <span class="stars">★★★☆☆</span>
                                 <span class="rating-text">3 - Good</span>
                             </label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="rating4" name="rating" value="4">
+                            <input type="radio" id="rating4" name="rating" value="4" required>
                             <label for="rating4">
                                 <span class="stars">★★★★☆</span>
                                 <span class="rating-text">4 - Very Good</span>
                             </label>
                         </div>
                         <div class="rating-option">
-                            <input type="radio" id="rating5" name="rating" value="5">
+                            <input type="radio" id="rating5" name="rating" value="5" required>
                             <label for="rating5">
                                 <span class="stars">★★★★★</span>
                                 <span class="rating-text">5 - Excellent</span>
@@ -82,17 +78,71 @@
                     </div>
                 </fieldset>
             </div>
-            
+
             <div class="form-group">
-                <label for="installDate">
-                    Date of Installation <span class="required-marker">*</span>
-                </label>
+                <label for="installDate">Date of Installation <span class="required-marker">*</span></label>
                 <input type="date" id="installDate" name="installDate" required>
                 <div class="hint">When did you install this product?</div>
             </div>
-            
+
             <div class="form-group">
                 <fieldset>
                     <legend>Useful Features (Check all that apply)</legend>
                     <div class="checkbox-group">
                         <div class="checkbox-option">
+                            <input type="checkbox" id="feature1" name="usefulFeatures" value="ease-of-use">
+                            <label for="feature1">Easy to install and use</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="feature2" name="usefulFeatures" value="durability">
+                            <label for="feature2">Durable and long-lasting</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="feature3" name="usefulFeatures" value="performance">
+                            <label for="feature3">High performance</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="feature4" name="usefulFeatures" value="design">
+                            <label for="feature4">Attractive design</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="feature5" name="usefulFeatures" value="value">
+                            <label for="feature5">Good value for money</label>
+                        </div>
+                        <div class="checkbox-option">
+                            <input type="checkbox" id="feature6" name="usefulFeatures" value="support">
+                            <label for="feature6">Good customer support</label>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+
+            <div class="form-group">
+                <label for="writtenReview">Written Review</label>
+                <textarea id="writtenReview" name="writtenReview" rows="5" placeholder="Tell us more about your experience with this product..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="userName">Your Name</label>
+                <input type="text" id="userName" name="userName" placeholder="Enter your name (optional)">
+            </div>
+
+            <div class="form-actions">
+                <input type="submit" value="Submit Review" class="submit-btn">
+            </div>
+        </form>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="currentYear"></span> | Product Review Form | WDD131</p>
+            <p>Last Modified: <span id="lastModified"></span></p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+        document.getElementById('lastModified').textContent = document.lastModified;
+    </script>
+</body>
+</html>
